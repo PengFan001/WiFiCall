@@ -1,5 +1,6 @@
 # WiFiCall
-实现同一局域网设备之间语音通话功能
+Implements the voice call function between devices that in the same wlan through UDP communication  
+通过UDP通信实现同一局域网设备之间语音通话功能  
 
 ## 使用方法
 1.两台设备都安装此应用，按照提示给对应的权限  
