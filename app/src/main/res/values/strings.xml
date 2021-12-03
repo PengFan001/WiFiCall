@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">WifiCall</string>
+    <string name="text_receiver_ip">对端IP地址：</string>
+    <string name="text_sender_port">对端接收端口：</string>
+    <string name="text_receiver_port">本机接收端口：</string>
+    <string name="text_set">设置</string>
+    <string name="text_call">拨号</string>
+    <string name="text_hungup">挂断</string>
+
+    <string name="limit_ip_can_not_null">IP地址不能为空</string>
+    <string name="limit_ip_format_error">IP地址格式错误</string>
+    <string name="limit_port_error">端口号必须大于0, 尽量设置较大的端口号例如:40000</string>
+</resources>
