@@ -10,4 +10,5 @@
     <string name="limit_ip_can_not_null">IP地址不能为空</string>
     <string name="limit_ip_format_error">IP地址格式错误</string>
     <string name="limit_port_error">端口号必须大于0, 尽量设置较大的端口号例如:40000</string>
+    <string name="text_local_ip">本机IP地址：</string>
 </resources>

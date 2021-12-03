@@ -271,35 +271,41 @@ public class WifiCallManager {
 
     private void closeReceiverThread() {
         try {
-            WifiManager wifiManager = (WifiManager) mService.getApplicationContext()
-                    .getSystemService(Context.WIFI_SERVICE);
-            if (wifiManager != null) {
-                String ip = intToIp(wifiManager.getDhcpInfo().ipAddress);
-                InetAddress inetAddress = InetAddress.getByName(ip);
-                byte[] data = CLOSE.getBytes();
-                DatagramPacket datagramPacket = new DatagramPacket(data, data.length, inetAddress, mReceiverPort);
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            mReceiverSocket.send(datagramPacket);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+            String ip = getLocalIpAddress();
+            InetAddress inetAddress = InetAddress.getByName(ip);
+            byte[] data = CLOSE.getBytes();
+            DatagramPacket datagramPacket = new DatagramPacket(data, data.length, inetAddress, mReceiverPort);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        mReceiverSocket.send(datagramPacket);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
-                }).start();
-                Thread.sleep(150);
-            }
+                }
+            }).start();
+            Thread.sleep(150);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     private String intToIp(int i) {
-        return (i & 0xFF ) + "." +
-                ((i >> 8 ) & 0xFF) + "." +
-                ((i >> 16 ) & 0xFF) + "." +
-                ( i >> 24 & 0xFF) ;
+        return (i & 0xFF) + "." +
+                ((i >> 8) & 0xFF) + "." +
+                ((i >> 16) & 0xFF) + "." +
+                (i >> 24 & 0xFF) ;
+    }
+
+    public String getLocalIpAddress() {
+        WifiManager wifiManager = (WifiManager) mService.getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
+        String ip = null;
+        if (wifiManager != null) {
+            ip = intToIp(wifiManager.getDhcpInfo().ipAddress);
+        }
+        return ip;
     }
 
     public int getSendPort() {

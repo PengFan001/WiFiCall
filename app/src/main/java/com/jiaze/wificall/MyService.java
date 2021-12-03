@@ -78,4 +78,8 @@ public class MyService extends Service {
     public String getReceiverIp() {
         return mWifiCallManager.getReceiverIp();
     }
+
+    public String getLocalIpAddress() {
+        return mWifiCallManager.getLocalIpAddress();
+    }
 }

@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jiaze.wificall.call.WifiCallManager;
@@ -28,6 +29,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
     private static final int REQUEST_CODE_PERMISSION = 10000;
     private static final int MSG_UPDATE_WIFI_CALL_STATE = 0;
 
+    private TextView mTvIp;
     private EditText mEtIp;
     private EditText mEtReceiverPort;
     private EditText mEtSenderPort;
@@ -76,6 +78,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
     }
 
     private void initView() {
+        mTvIp = (TextView) findViewById(R.id.tv_ip);
         mEtIp = (EditText) findViewById(R.id.et_ip);
         mEtSenderPort = (EditText) findViewById(R.id.et_sender_port);
         mEtReceiverPort = (EditText) findViewById(R.id.et_receiver_port);
@@ -114,6 +117,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
 
             mEtReceiverPort.setText(String.valueOf(receiverPort));
             mEtSenderPort.setText(String.valueOf(senderPort));
+            mTvIp.setText(mService.getLocalIpAddress());
             mEtIp.setText(ip);
             mService.registerWifiCallListener(mCallStateListener);
         }
@@ -213,6 +217,7 @@ public class MainActivity extends Activity implements View.OnClickListener, Serv
         mBtnConfigure.setEnabled(true);
         mEtReceiverPort.setText(String.valueOf(mService.getReceiverPort()));
         mEtSenderPort.setText(String.valueOf(mService.getSenderPort()));
+        mTvIp.setText(mService.getLocalIpAddress());
         mEtIp.setText(mService.getReceiverIp());
         mService.registerWifiCallListener(mCallStateListener);
     }
